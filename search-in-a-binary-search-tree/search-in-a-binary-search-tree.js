@@ -12,7 +12,7 @@
  * @return {TreeNode}
  */
 var searchBST = function(root, val) {
-    if(root===null) return false
+    if(root===null) return null
     let current = root
     while(current){
         if(val<current.val){
