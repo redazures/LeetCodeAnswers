@@ -12,14 +12,15 @@
  */
 var invertTree = function(root) {
     if(!root) return null
-    const flip =(root)=>{
-        if(!root)return
-        let temp = root.left
-        root.left=root.right
-        root.right=temp
-        flip(root.left)
-        flip(root.right)
+    const queue = [root]
+    const swap = (node)=>{
+        [node.left,node.right] = [node.right,node.left]
     }
-    flip(root)
+    while(queue.length){
+        const node = queue.pop()
+        swap(node)
+        if(node.left)queue.push(node.left)
+        if(node.right)queue.push(node.right)
+    }
     return root
 };
