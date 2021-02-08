@@ -10,14 +10,12 @@ var flipAndInvertImage = function(A) {
     for(let i =0;i<A.length;i++){
         const row = A[i]
         const mid = Math.floor(row.length/2)
-        for(let j =0;j<mid;j++){
-            swap(j,row.length-1-j,row) 
-        }
-        for(let k =0;k<row.length;k++){
-            if(row[k]===1){
-                row[k]=0
+        for(let j =0;j<row.length;j++){
+            if(j<mid)swap(j,row.length-1-j,row) 
+            if(row[j]===1){
+                row[j]=0
             }else{
-                row[k]=1
+                row[j]=1
             }
         }
     }
