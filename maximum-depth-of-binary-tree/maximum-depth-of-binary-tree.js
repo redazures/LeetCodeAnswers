@@ -11,16 +11,19 @@
  * @return {number}
  */
 var maxDepth = function(root) {
-    if (!root) return 0
-    let count=0
-    let maxCount =0
-    let queue =[[root,count]]
-    while(queue.length){
-        let [node,count] = queue.pop()
-        count++
-        maxCount=Math.max(maxCount,count)
-        if(node.left)queue.push([node.left,count])
-        if(node.right)queue.push([node.right,count])
-    }
-    return maxCount
+    // if (!root) return 0
+    // let count=0
+    // let maxCount =0
+    // let queue =[[root,count]]
+    // while(queue.length){
+    //     let [node,count] = queue.pop()
+    //     count++
+    //     maxCount=Math.max(maxCount,count)
+    //     if(node.left)queue.push([node.left,count])
+    //     if(node.right)queue.push([node.right,count])
+    // }
+    // return maxCount
+    if(!root) return 0
+    let max = Math.max(maxDepth(root.left),maxDepth(root.right))
+    return max+1
 };
