@@ -16,9 +16,9 @@ var trap = function(height) {
     for(let i=0;i<index;i++){
         if(!start || height[i]>start){
             start=height[i]
-        }
-        else{
-            sum+=(start-height[i])
+        } else {
+            const difference = (start-height[i])
+            sum = sum + difference
         }
     }
     
