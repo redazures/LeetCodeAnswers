@@ -3,37 +3,31 @@
  * @return {number}
  */
 var trap = function(height) {
-    if(height.length===0) return 0
-    let sum = 0, start, end, max=0, index=0
+    if(height.length<=2) return 0
+
+    let start, end, sum=0, max=0, index=0
     
-    for (let j =0;j<height.length;j++){
-        let prev = max
-        max = Math.max(max,height[j])
-        if (prev!==max)index=j
+    for(let k=0;k<height.length;k++){
+        const prev = max
+        max=Math.max(max,height[k])
+        if(prev!==max)index=k
     }
-    
-    // console.log(index)
     
     for(let i=0;i<index;i++){
-        const current = height[i]
-        if(!start && height[i]>0){
-            start = height[i]
-        }else if(current>=start){
-            start = height[i]
-        }else if(start){
-            sum+= (start-height[i])
+        if(!start || height[i]>start){
+            start=height[i]
+        }
+        else{
+            sum+=(start-height[i])
         }
     }
-    // console.log(sum)
     
-    for(let k=height.length-1;k>index;k--){
-        const current = height[k]
-        if(!end && height[k]>0){
-            end = height[k]
-        }else if(current>=end){
-            end = height[k]
-        }else if(end){
-            sum+= (end-height[k])
+    for(let j=height.length-1;j>index;j--){
+        if(!end || height[j]>end){
+            end=height[j]
+        }
+        else{
+            sum+=(end-height[j])
         }
     }
     
