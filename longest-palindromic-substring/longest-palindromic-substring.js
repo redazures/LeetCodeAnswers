@@ -16,11 +16,16 @@ var longestPalindrome = function(s) {
     }
     
     let maxString = ""
-    for(let i=0;i<s.length;i++){
+    for(let i=0;i<s.length-(maxString.length/2);i++){
         const odd =isPalin(i,i,s)
-        const even =isPalin(i,i+1,s)
-        const longer = odd.length>=even.length ? odd : even
-        maxString = maxString.length>=longer.length ? maxString : longer
+        // const even = s[i]===s[i+1] ? isPalin(i,i+1,s) : ""
+        //The above is slower for some reason
+        const even = isPalin(i,i+1,s) 
+        if(odd.length>even.length && odd.length>maxString.length){
+            maxString=odd
+        }else if(even.length>maxString.length){
+            maxString=even
+        }
     }
 
     return maxString
