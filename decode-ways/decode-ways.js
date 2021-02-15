@@ -5,15 +5,22 @@
 var numDecodings = function(s) {
     if (!s || s[0] === '0') { return 0; }
     
-    let dp = new Array(s.length + 1).fill(0);
-    dp[1] = 1;
+    let arr = new Array(s.length + 1).fill(0);
+    arr[1] = 1;
     
-    for (let i = 2; i <= s.length; i++) {
-        let c = s[i - 1], p = s[i - 2], n = parseInt(p + c);
+    for(let i=2;i <=s.length; i++){
+        let curr = s[i-1], prev=s[i-2], num = parseInt(prev + curr)
         
-        if (c !== '0') { dp[i] += dp[i - 1]; }
-        if (p !== '0' && n <= 26) { dp[i] += Math.max(dp[i - 2], 1); }
-        if (dp[i] === 0) { return 0; }
+        if(curr!=='0'){
+            arr[i] += arr[i-1]
+        }
+        
+        if(prev !== '0' && num <= 26){
+            arr[i] += Math.max(arr[i-2],1)
+        }
+        if (arr[i]===0) return 0
     }
-    return dp[s.length];
+    
+    return arr[s.length];
+    
 };
