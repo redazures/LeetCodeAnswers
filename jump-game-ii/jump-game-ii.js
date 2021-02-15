@@ -15,8 +15,6 @@ var jump = function(nums) {
 //     }
     
 //     return arr[arr.length-1]
-    let jumps = 0 
-    if(!nums || !nums.length) return -1;
     let start = 0, end = 0, jump = 0;
     while(end < nums.length -1) {
         jump++;
