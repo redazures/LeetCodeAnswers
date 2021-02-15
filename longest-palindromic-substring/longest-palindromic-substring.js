@@ -18,8 +18,6 @@ var longestPalindrome = function(s) {
     let maxString = ""
     for(let i=0;i<s.length-(maxString.length/2);i++){
         const odd =isPalin(i,i,s)
-        // const even = s[i]===s[i+1] ? isPalin(i,i+1,s) : ""
-        //The above is slower for some reason
         const even = isPalin(i,i+1,s) 
         if(odd.length>even.length && odd.length>maxString.length){
             maxString=odd
