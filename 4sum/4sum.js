@@ -4,35 +4,34 @@
  * @return {number[][]}
  */
 var fourSum = function(nums, target) {
-    
+    if (nums.length < 4) return []
     nums.sort((a,b)=>a-b)
+    let ans = []
     
-    const ans = []
-    for(let i=0;i<nums.length;i++){
+    for(let i=0;i<nums.length-1;i++){
+        const compare1 = nums[i]
+        const compare2 = nums[i-1]
+        if(i>0 && compare1 === compare2) continue
         for(let j=i+1;j<nums.length;j++){
-            for(let k=j+1;k<nums.length;k++){
-                for(let l=k+1;l<nums.length;l++){
-                    if(nums[i]+nums[j]+nums[k]+nums[l]===target){
-                        ans.push([nums[i],nums[j],nums[k],nums[l]])
-                    }
+            const contrast1 = nums[j]
+            const contrast2 = nums[j-1]
+            if(j>i+1 && contrast1 === contrast2) continue
+            let left=j+1, right=nums.length-1
+            
+            while(left<right){
+                const sum = compare1+contrast1+nums[left]+nums[right]
+                // console.log(compare1,contrast1,nums[left],nums[right])
+                if(sum===target){
+                    ans.push([compare1,contrast1,nums[left],nums[right]])
+                }
+                if (sum<=target){
+                    while (nums[left] === nums[++left]);  
+                } else {
+                    while (nums[right] === nums[--right]);  
                 }
             }
         }
+        
     }
-    
-    // console.log(ans)
-    
-    for(let i=0;i<ans.length-1;i++){
-        for(let j=i+1;j<ans.length;j++){
-            console.log(ans[i],ans[j])
-            let [one, two, three] = ans[i]
-            let [oneNext, twoNext, threeNext] = ans[j]
-            if(one===oneNext && two===twoNext && three===threeNext){
-                ans.splice(j,1)
-                j--
-            }
-        }
-    }
-    
     return ans
 };
