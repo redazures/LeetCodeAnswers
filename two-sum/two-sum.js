@@ -4,9 +4,15 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    var key = {}
-    for(let i=0;i<nums.length;i++){
-        if (nums[i] in key && key[nums[i]] !== i) return [key[nums[i]],i]
-        key[target-nums[i]]=i     
-    }
+    let val = {}
+    for(let i=0;i<nums.length;i++){
+        const difference = target - nums[i]
+        if(difference in val){
+            return [val[difference],i]
+        } else {
+            val[nums[i]]=i
+        }
+        // console.log(val[nums[i]],val,val[difference])
+    }
+    return [1,2]
 };
