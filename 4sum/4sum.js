@@ -16,11 +16,9 @@ var fourSum = function(nums, target) {
             const contrast1 = nums[j]
             const contrast2 = nums[j-1]
             if(j>i+1 && contrast1 === contrast2) continue
-            let left=j+1, right=nums.length-1
-            
+            let left=j+1, right=nums.length-1    
             while(left<right){
                 const sum = compare1+contrast1+nums[left]+nums[right]
-                // console.log(compare1,contrast1,nums[left],nums[right])
                 if(sum===target){
                     ans.push([compare1,contrast1,nums[left],nums[right]])
                 }
