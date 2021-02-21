@@ -2,13 +2,13 @@
  * @param {number} capacity
  */
 var LRUCache = function(capacity) {
-    this.capacity =capacity
+    this.capacity = capacity
     this.map = new Map()
     
-    this.head ={}
-    this.tail={}
-    this.head.next=this.tail
-    this.tail.prev=this.head
+    this.head = {}
+    this.tail = {}
+    this.head.next = this.tail
+    this.tail.prev = this.head
 };
 
 /** 
@@ -29,6 +29,7 @@ LRUCache.prototype.get = function(key) {
     } else {
         return -1
     }
+    
 };
 
 /** 
@@ -40,7 +41,7 @@ LRUCache.prototype.put = function(key, value) {
   if(this.get(key) !== -1){ //key does not exist, update last element value 
     this.tail.prev.value = value; 
   } else {
-    //need to check if map size is at capacity
+    
     if(this.map.size === this.capacity) { 
       //delete item both from map and DLL
       this.map.delete(this.head.next.key); //delete first element of list
@@ -51,15 +52,13 @@ LRUCache.prototype.put = function(key, value) {
     let newNode = {
       value, 
       key
-    }; //each node is a hashtable that stores key and value 
+    }; 
     
-    
-    //When adding a new node, we need to update both map and DLL
-    this.map.set(key, newNode); //add current node to map 
-    this.tail.prev.next = newNode; //add node to end of the list
-    newNode.prev = this.tail.prev; //update prev and next pointers of newNode
+    this.map.set(key, newNode); 
+    this.tail.prev.next = newNode; 
+    newNode.prev = this.tail.prev; 
     newNode.next = this.tail;
-    this.tail.prev = newNode; //update last element
+    this.tail.prev = newNode; 
   }
 };
 
