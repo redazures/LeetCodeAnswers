@@ -2,8 +2,8 @@
  * @param {number} capacity
  */
 var LRUCache = function(capacity) {
-    this.capacity = capacity
     this.map = new Map()
+    this.cap = capacity
     
     this.head = {}
     this.tail = {}
@@ -17,19 +17,18 @@ var LRUCache = function(capacity) {
  */
 LRUCache.prototype.get = function(key) {
     if(this.map.has(key)){
-        let c = this.map.get(key)
-        c.prev.next=c.next
-        c.next.prev=c.prev
+        let object = this.map.get(key)
+        object.prev.next = object.next
+        object.next.prev = object.prev
         
-        this.tail.prev.next=c
-        c.prev=this.tail.prev
-        c.next=this.tail
-        this.tail.prev=c
-        return c.value
-    } else {
+        this.tail.prev.next = object
+        object.prev = this.tail.prev
+        object.next = this.tail
+        this.tail.prev = object
+        return object.value
+    }else{
         return -1
     }
-    
 };
 
 /** 
@@ -38,28 +37,23 @@ LRUCache.prototype.get = function(key) {
  * @return {void}
  */
 LRUCache.prototype.put = function(key, value) {
-  if(this.get(key) !== -1){ //key does not exist, update last element value 
-    this.tail.prev.value = value; 
-  } else {
-    
-    if(this.map.size === this.capacity) { 
-      //delete item both from map and DLL
-      this.map.delete(this.head.next.key); //delete first element of list
-      this.head.next = this.head.next.next; //update first element as next element
-      this.head.next.prev = this.head; 
+    if(this.get(key) !== -1 ){
+        this.tail.prev.value = value
+    } else {
+        if(this.map.size === this.cap){
+            this.map.delete(this.head.next.key)
+            this.head.next = this.head.next.next
+            this.head.next.prev = this.head
+        }
+        
+        let newNode = {value, key}
+        
+        this.map.set(key,newNode)
+        this.tail.prev.next = newNode
+        newNode.next = this.tail
+        newNode.prev = this.tail.prev
+        this.tail.prev = newNode
     }
-
-    let newNode = {
-      value, 
-      key
-    }; 
-    
-    this.map.set(key, newNode); 
-    this.tail.prev.next = newNode; 
-    newNode.prev = this.tail.prev; 
-    newNode.next = this.tail;
-    this.tail.prev = newNode; 
-  }
 };
 
 /** 
