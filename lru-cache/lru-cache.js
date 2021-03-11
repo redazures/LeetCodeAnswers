@@ -17,18 +17,17 @@ var LRUCache = function(capacity) {
  */
 LRUCache.prototype.get = function(key) {
     if(this.map.has(key)){
-        let obj = this.map.get(key)
-        obj.prev.next = obj.next
-        obj.next.prev = obj.prev
+        let found = this.map.get(key)
+        found.next.prev = found.prev
+        found.prev.next = found.next
         
-        obj.prev = this.tail.prev
-        obj.next = this.tail
+        this.tail.prev.next = found
+        found.prev = this.tail.prev
+        found.next = this.tail
+        this.tail.prev = found
         
-        this.tail.prev.next = obj
-        this.tail.prev = obj
-        
-        return obj.value
-    }else {
+        return found.value
+    }else{
         return -1
     }
 };
@@ -39,25 +38,26 @@ LRUCache.prototype.get = function(key) {
  * @return {void}
  */
 LRUCache.prototype.put = function(key, value) {
-    if(this.get(key) !== -1){
+    if(this.get(key) !==-1 ){
         this.tail.prev.value = value
-    }else{
-        if(this.map.size === this.cap){
+    } else {
+        if(this.map.size===this.cap){
             this.map.delete(this.head.next.key)
             this.head.next = this.head.next.next
             this.head.next.prev = this.head
         }
         
-        let newNode ={ value,key }
+        let newNode = {value,key}
         
-        this.map.set(key, newNode)
+        this.map.set(key,newNode)
         
-        newNode.next = this.tail
-        newNode.prev = this.tail.prev
         this.tail.prev.next = newNode
+        
+        newNode.prev = this.tail.prev
+        newNode.next = this.tail
+        
         this.tail.prev = newNode
     }
-    
 };
 
 /** 
