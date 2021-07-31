@@ -3,8 +3,8 @@
  * @return {boolean}
  */
 var isRobotBounded = function(instructions) {
-    let x=0, y=0, dx=0,dy=1, temp
-    for(let letter of instructions){
+    let x=0,y=0,dy=1,dx=0, temp
+    for(const letter of instructions){
         if(letter==="R"){
             temp = dx
             dx=dy
@@ -19,4 +19,5 @@ var isRobotBounded = function(instructions) {
         }
     }
     return(!x && !y) || dy!=1
+    
 };
