@@ -7,9 +7,9 @@ var trap = function(height) {
   let r = height.length - 1;
   let lvl = 0;
   let sum = 0;
+    let lower;
 
   while (l < r) {
-    let lower = 0;
     if (height[l] < height[r]) {
       lower = height[l];
       l++;
