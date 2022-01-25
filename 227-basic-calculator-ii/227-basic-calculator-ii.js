@@ -34,6 +34,5 @@ var calculate = function(s) {
         }
         sign
     }
-    console.log(stack)
     return stack.reduce((a,b)=>a+b)
 };
