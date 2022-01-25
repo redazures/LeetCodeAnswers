@@ -5,21 +5,21 @@
 var calculate = function(s) {
     const special = {"*":1, "/":2," ":5,"-":3, "+":4}
     s=s+"+"
-    let stack = [], sign=undefined, number=""
+    let stack = [], sign=undefined, number="", int, last
     for(let i=0; i<s.length; i++){
         const char = s[i]
         if(special[char]===5) continue
         if(special[char] && special[char]<5){
-            let int = Number(number)
+            int = Number(number)
             if(sign==="-"){
                 int = -int
             }
             if(sign==="*"){
-                const last  = stack.pop()
+                last  = stack.pop()
                 int = int*last
             }
             if(sign==="/"){
-                const last  = stack.pop()
+                last  = stack.pop()
                 if(last<0){
                     int = Math.ceil(last/int)
                 }else{
