@@ -7,6 +7,9 @@ var maxSubArray = function(nums) {
     for(let i=0;i<nums.length;i++){
         sum+=nums[i]
         highest = Math.max(highest, sum)
+        if(sum<0){
+            sum=0
+        }
         sum = sum<0 ? 0 : sum
     }
     
