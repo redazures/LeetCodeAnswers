@@ -11,41 +11,37 @@
  * @return {ListNode}
  */
 var reverseKGroup = function(head, k) {
-    
-    let resultNode = null;
-    
+    let res, join;
     const reverse = (head, k) => {
-        let prev=null, temp, count=0, last=head
+        let count = 0, prev=null, temp, last=false
         while(head && count<k){
-            temp = head
-            head = head.next
-            temp.next = prev
-            prev = temp
+            temp = head.next
+            head.next = prev
+            prev = head
+            head = temp
             count++
         }
-        
         if(count<k){
-            return [prev, false, false]
+            last = true
         }
         return [prev, head, last]
     }
-    
-    let prevJoint
+        
     while(head){
-        const [result, resi, joint] = reverse(head, k)
-        if(!resi && !joint){
-            const [reverted] = reverse(result, k) 
-            prevJoint.next = reverted
-            return resultNode
+        let [newList, resi, last] = reverse(head, k)
+        if(last){
+            [newList] = reverse(newList,k)
+            join.next = newList
+            return res
         }
-        if(resultNode && prevJoint){
-            prevJoint.next = result
+        if(!res){
+            res = newList
         }
-        if(!resultNode){
-            resultNode = result
+        if(join){
+            join.next = newList
         }
-        prevJoint = joint
+        join = head
         head = resi
     }
-    return resultNode
+    return res
 };
