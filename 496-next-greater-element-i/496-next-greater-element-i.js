@@ -14,7 +14,6 @@ var nextGreaterElement = function(nums1, nums2) {
             }
         }        
     })
-    // console.log(index)
     nums1.forEach((el)=>{
         const idx = index[el]
         res.push(idx)
