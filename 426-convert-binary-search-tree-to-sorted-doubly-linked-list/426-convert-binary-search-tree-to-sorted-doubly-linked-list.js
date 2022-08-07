@@ -14,13 +14,11 @@
 var treeToDoublyList = function(root) {
     let tail, head
     const convertNode = (node) => {
-        if(!node) return
+        if(!node)return
         convertNode(node.left)
-        if(!head)head = node
-        if(tail){
-            tail.right = node
-        }
-        node.left = tail
+        if(!head)head=node
+        if(tail)tail.right = node
+        node.left =tail
         tail = node
         convertNode(node.right)
     }
